@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <jsp-config>
+        <taglib>
+            <taglib-uri>http://www.pizzaalex.de/taglib</taglib-uri>
+            <taglib-location>/WEB-INF/tlds/pizzaTagLib.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <display-name>CustomerRule</display-name>
+        <web-resource-collection>
+            <web-resource-name>Customer folder</web-resource-name>
+            <description/>
+            <url-pattern>/Customer/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Customer</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>CookRule</display-name>
+        <web-resource-collection>
+            <web-resource-name>Cook Folder</web-resource-name>
+            <description/>
+            <url-pattern>/Cook/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Cook</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ManagerRule</display-name>
+        <web-resource-collection>
+            <web-resource-name>Manager Folder</web-resource-name>
+            <description/>
+            <url-pattern>/Manager/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>Manager</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>is able to view the menu card, but can not do changes</description>
+        <role-name>Customer</role-name>
+    </security-role>
+    <security-role>
+        <description>Can add and delete items from menu.</description>
+        <role-name>Cook</role-name>
+    </security-role>
+    <security-role>
+        <description>Can change prices of items.</description>
+        <role-name>Manager</role-name>
+    </security-role>
+</web-app>
