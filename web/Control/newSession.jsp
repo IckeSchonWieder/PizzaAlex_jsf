@@ -9,6 +9,6 @@
 <% 
     
     session.invalidate(); 
-    response.sendRedirect("../index.jsp");
+    response.sendRedirect("../index.xhtml");
 
 %>

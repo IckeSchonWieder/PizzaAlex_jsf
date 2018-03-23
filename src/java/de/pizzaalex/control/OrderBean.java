@@ -2,6 +2,7 @@
 package de.pizzaalex.control;
 
 import de.pizzaalex.db.DaoOrder;
+import de.pizzaalex.model.Customer;
 import de.pizzaalex.model.Order;
 import de.pizzaalex.model.OrderedItem;
 import de.pizzaalex.model.Pizza;
@@ -9,7 +10,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
+
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,9 +89,20 @@ public class OrderBean implements Serializable {
         } catch (NullPointerException e) {
             System.out.println("No Pizza found to remove!");
         }
-        
+    }
+    
+    public void finalizeOrder(HttpServletRequest req) {
+        setIpAndSession(req);
+        addOrder(order);
         
     }
+    
+    public String checkOrder(Customer cus){
+        this.order.cus = cus;
+        
+        return "checkOrder.xhtml";
+    }
+    
     
     public void respSenden(HttpServletResponse resp, String url) {
         try {

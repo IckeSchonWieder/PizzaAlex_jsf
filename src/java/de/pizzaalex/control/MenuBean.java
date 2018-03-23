@@ -5,7 +5,9 @@ import de.pizzaalex.db.DaoPizza_AW;
 import de.pizzaalex.model.Pizza;
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
+
+
 import javax.inject.Named;
 
 
