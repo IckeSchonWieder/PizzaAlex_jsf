@@ -18,6 +18,7 @@ public class OrderedItem implements Serializable{
     public OrderedItem(Pizza pizza, int count) {
         this.pizza = pizza;
         this.count = count;
+        
     }
 
     public OrderedItem() {

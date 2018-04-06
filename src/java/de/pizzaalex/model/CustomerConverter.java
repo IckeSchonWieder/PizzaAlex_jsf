@@ -1,9 +1,6 @@
 package de.pizzaalex.model;
 
 import de.pizzaalex.control.CustomerBean;
-import java.util.ArrayList;
-import java.util.List;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -11,11 +8,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
-import javax.inject.Named;
+
 
 @FacesConverter(forClass = de.pizzaalex.model.Customer.class, value = "customerCon")
-@RequestScoped
-@Named
 public class CustomerConverter implements Converter {
 
     @Inject

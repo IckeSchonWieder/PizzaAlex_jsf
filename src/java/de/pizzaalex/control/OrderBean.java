@@ -6,15 +6,11 @@ import de.pizzaalex.model.Customer;
 import de.pizzaalex.model.Order;
 import de.pizzaalex.model.OrderedItem;
 import de.pizzaalex.model.Pizza;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.enterprise.context.SessionScoped;
-
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -25,13 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 @SessionScoped
 public class OrderBean implements Serializable {
     private Order order;
+    
 
     public OrderBean() {
         order = new Order();
         DaoOrder dao = new DaoOrder();
     }
 
-   
+    
     public Order getOrder() {
         return order;
     }
@@ -47,7 +44,9 @@ public class OrderBean implements Serializable {
     }
     
    
-    public void setIpAndSession(HttpServletRequest req) {
+    public void setIpAndSession() {
+        HttpServletRequest req=(HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
         order.setIpAddr(req.getRemoteAddr());
         order.setSessId(req.getSession().getId());
     }
@@ -91,25 +90,19 @@ public class OrderBean implements Serializable {
         }
     }
     
-    public void finalizeOrder(HttpServletRequest req) {
-        setIpAndSession(req);
+
+    public String finalizeOrder() {
+        setIpAndSession();
         addOrder(order);
-        
+        return "finalize";
     }
     
-    public String checkOrder(Customer cus){
-        this.order.cus = cus;
+    public String backToIndex() {
+        HttpServletRequest req=(HttpServletRequest) FacesContext.getCurrentInstance()
+                .getExternalContext().getRequest();
         
-        return "checkOrder.xhtml";
-    }
-    
-    
-    public void respSenden(HttpServletResponse resp, String url) {
-        try {
-            resp.sendRedirect(url);
-        } catch (IOException ex) {
-            Logger.getLogger(Order.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        req.getSession().invalidate();
+        return "start";
     }
     
 }

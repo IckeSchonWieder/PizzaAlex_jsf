@@ -13,6 +13,10 @@ import de.pizzaalex.model.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
@@ -21,6 +25,7 @@ import javax.servlet.http.*;
  * @author AWagner
  */
 @WebServlet(name = "Rechnung", urlPatterns = "/generate/Rechnung.pdf")
+
 public class PdfServlet extends HttpServlet {
 
     /**
@@ -28,22 +33,26 @@ public class PdfServlet extends HttpServlet {
      * @param req
      * @param resp
      */
+    @Inject
+    OrderBean orderBean;
     
     //MyBean sessBean;
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         Document document = new Document();
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         PdfPTable table;
-        OrderBean ordBean = null;
+        
+       
+        
         try {
             resp.setContentType("application/pdf");
             //benötigter Zugriff auf die im Sessionscope
             //abgelegte Bean
             HttpSession sess = req.getSession();
             
-            if (sess.getAttribute("orders") != null) {
-                ordBean = (OrderBean) sess.getAttribute("orders");
-                Order ord = ordBean.getOrder();
+            if (orderBean.getOrder().items.size()>0) {
+                
+                Order ord = orderBean.getOrder();
                 PdfWriter.getInstance(document, bos);
                 document.open();
                 

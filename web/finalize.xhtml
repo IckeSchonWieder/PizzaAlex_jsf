@@ -9,21 +9,23 @@ and open the template in the editor.
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <head>
-        <title>Bestellt!</title>
+        <title> <h:outputText value="#{label.finalHeader}" /> </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
     <body>
-        <h1>Bestellt!!</h1>
-       
-        <h:outputText value="#{"Ihre IP: "+ orderBean.order.ipAddr() }"/> <br/>
-        <h:outputText value="#{"Ihre SessID: "+ orderBean.order.sessId() }" /> <br/>
+        <h1><h:outputText value="#{label.finalHeader}" /></h1>
         
-        <h:link outcome="generate/Rechnung.pdf" value="Bitte klicken für Ihre Rechnung"/>
+        <h:outputText value="#{label.ip += orderBean.order.ipAddr}"/> <br/>
+        <h:outputText value="#{label.sess += orderBean.order.sessId }" /> <br/>
+        
+        <p>
+            <h:link outcome="generatePDF" value="#{label.bill}"/>
+        </p>
         <br/>
                 
         <h:form>
-            
-            <h:commandButton action="/Control/newSession.jsp"/>
+            <h:commandButton action="#{orderBean.backToIndex()}" 
+                             value="#{label.index}"/>
         </h:form>
     </body>
 </html>

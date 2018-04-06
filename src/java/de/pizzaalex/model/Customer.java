@@ -1,12 +1,11 @@
 
 package de.pizzaalex.model;
-import java.io.Serializable;
 
 /**
  *
  * @author AWagner
  */
-public class Customer implements Serializable {
+public class Customer extends User {
    // public static int count = 0;
     public int id;
     public String firstname;
@@ -91,7 +90,7 @@ public class Customer implements Serializable {
     
     @Override
     public String toString() {
-        return "Kunde Nr " + id + ": " + firstname + " " + lastname + ", " +
+        return id + ": " + firstname + " " + lastname + ", " +
                street + ", " + postalcode + " " + city;
                
     }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene Scope="Project" version="2">
+    <Scope Scope="Faces Configuration Only"/>
+    <Scope Scope="Project">
+        <Node id="error.xhtml" x="316" y="532" zoom="true"/>
+        <Node id="login.xhtml" x="50" y="214" zoom="true"/>
+        <Node id="generate/Rechnung.pdf" x="707" y="214" zoom="true"/>
+        <Node id="index.xhtml" x="556" y="524" zoom="true"/>
+        <Node id="newCustomer.xhtml" x="639" y="395" zoom="true"/>
+        <Node id="manager/manager.xhtml" x="49" y="363" zoom="true"/>
+        <Node id="finalize.xhtml" x="115" y="79" zoom="true"/>
+        <Node id="checkOrder.xhtml" x="283" y="126" zoom="true"/>
+        <Node id="cook/cook.xhtml" x="127" y="476" zoom="true"/>
+        <Node id="*" x="346" y="284" zoom="true"/>
+        <Node id="customer.xhtml" x="489" y="71" zoom="true"/>
+    </Scope>
+    <Scope Scope="All Faces Configurations"/>
+</Scene>

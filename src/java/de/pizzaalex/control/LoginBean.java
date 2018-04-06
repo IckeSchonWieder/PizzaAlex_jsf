@@ -9,6 +9,9 @@ import de.pizzaalex.model.User;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,11 +19,19 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author AWagner
  */
+@SessionScoped
+@Named
 public class LoginBean implements Serializable{
     private User user;
     private Boolean loggedIn;
     private String role;
 
+    
+    
+    public LoginBean() {
+        user = new User();
+    }
+    
     public User getUser() {
         return user;
     }
@@ -46,34 +57,40 @@ public class LoginBean implements Serializable{
     }
     
     public void settingRole(HttpServletRequest request) {
-        if (request.isUserInRole("Customer")){
-            role = "Customer";
-        } else if (request.isUserInRole("Cook")) {
-            role = "Cook";
-        } else if (request.isUserInRole("Manager")) {
-            role = "Manager";
+        if (request.isUserInRole("customerRole")){
+            role = "customer";
+        } else if (request.isUserInRole("cookRole")) {
+            role = "cook";
+        } else if (request.isUserInRole("managerRole")) {
+            role = "manager";
         } else {
             role = null; 
         }
     }
     
     
-    public Boolean login(User user, HttpServletRequest req){
-        this.user=user;
+    public String login(HttpServletRequest req){
+        System.out.println("Login: " +user.toString());
+        //HttpServletRequest req=(HttpServletRequest) FacesContext.getCurrentInstance()
+        //        .getExternalContext().getRequest();
         try {
+            
             req.login(user.getUsername(), user.getPassword());
             loggedIn=true;
             settingRole(req);
+            
         } catch (ServletException ex) {
             loggedIn=false;
             Logger.getLogger(LoginBean.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return loggedIn;
+        return "loginAs"+role;
         
     }
     
     public void logout(HttpServletRequest req) {
+       // HttpServletRequest req=(HttpServletRequest) FacesContext.getCurrentInstance()
+         //       .getExternalContext().getRequest();
         try {
             req.logout();
             loggedIn = false;

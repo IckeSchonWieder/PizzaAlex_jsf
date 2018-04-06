@@ -25,4 +25,47 @@
     <welcome-file-list>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>managerRule</display-name>
+        <web-resource-collection>
+            <web-resource-name>managerFolder</web-resource-name>
+            <description/>
+            <url-pattern>/faces/manager/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>managerRole</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>cookRule</display-name>
+        <web-resource-collection>
+            <web-resource-name>cookFolder</web-resource-name>
+            <description/>
+            <url-pattern>/faces/cook/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>cookRole</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/newjsf.xhtml</form-login-page>
+            <form-error-page>/error.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description/>
+        <role-name>managerRole</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>cookRole</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>customerRole</role-name>
+    </security-role>
 </web-app>
